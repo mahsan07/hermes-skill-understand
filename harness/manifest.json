@@ -1,0 +1,85 @@
+{
+  "protocol_version": "0.1",
+  "skill": {
+    "id": "hermes-skill-understand",
+    "display_name": "Understand",
+    "description": "Analyze a codebase into an interactive knowledge graph of components and relationships."
+  },
+  "task_profile": {
+    "category": "engineering",
+    "architecture": "graph",
+    "artifact": "graph",
+    "inputs": [
+      "Repository files",
+      "Symbol extractor"
+    ],
+    "outputs": [
+      "Interactive explorer",
+      "Module node",
+      "Calls edge",
+      "Data flow",
+      "Subsystem cluster"
+    ]
+  },
+  "modules": {
+    "memory": {
+      "strategy": "entity_relationship_memory",
+      "responsibility": "Retain repository files plus decisions, observations, and verification evidence needed to resume safely."
+    },
+    "planning": {
+      "strategy": "dependency_and_path_traversal",
+      "responsibility": "Transform symbol extractor into the ordered, bounded stages defined by this skill."
+    },
+    "action": {
+      "strategy": "inspect_change_test_handoff",
+      "responsibility": "Advance the workflow through component model while preserving stop conditions and user authority."
+    },
+    "capability": {
+      "strategy": "task_conditioned_minimum_capability_set",
+      "responsibility": "Expose only repository, runtime, and verification capabilities required by the bounded engineering task."
+    }
+  },
+  "execution": {
+    "stages": [
+      "Index source files and project metadata",
+      "Extract symbols modules and entry points",
+      "Infer components from code evidence",
+      "Connect calls imports and data flows",
+      "Cluster subsystems and boundaries",
+      "Generate an explorable knowledge graph"
+    ],
+    "gates": [
+      "scope_and_authority_confirmed",
+      "capability_and_dependency_preflight",
+      "consequential_action_previewed_when_applicable",
+      "output_reopened_and_verified"
+    ]
+  },
+  "verification": {
+    "evidence": [
+      "Module node",
+      "Calls edge",
+      "Data flow",
+      "Subsystem cluster"
+    ],
+    "metrics": [
+      "task_success",
+      "verification_pass_rate",
+      "tool_error_rate",
+      "repair_count",
+      "latency_ms",
+      "estimated_cost_usd"
+    ]
+  },
+  "failure_policy": {
+    "max_repairs": 2,
+    "schema_error": "repair_then_stop",
+    "permission_error": "stop_without_retry",
+    "verification_failure": "report_incomplete"
+  },
+  "maturity": {
+    "level": "executable_contract",
+    "runtime_scope": "validation_and_dry_run_planning",
+    "claim_boundary": "This repository validates and plans the harness contract; it does not claim live service execution or benchmark gains without a connected adapter and measured evidence."
+  }
+}
